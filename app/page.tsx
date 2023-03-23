@@ -1,101 +1,121 @@
-import Image from "next/image";
 import { Inter } from "next/font/google";
 import styles from "./page.module.css";
+import Header from "./components/header/page";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
     return (
-        <main className={styles.main}>
-            <div className={styles.description}>
-                <p>
-                    Get started by editing&nbsp;
-                    <code className={styles.code}>app/page.tsx</code>
-                </p>
-                <div>
+        <>
+            <Header />
+            <main className={styles.main}>
+                <>
+                    <div className="relative isolate overflow-hidden ">
+                        <div className="px-6 sm:px-6 sm:py-14 lg:px-8">
+                            <div className="mx-auto max-w-5xl text-center">
+                                <h2 className="text-3xl font-bold tracking-tight text-white sm:text-8xl">
+                                    The Ultimate Bash
+                                    <br />
+                                    Command Generator!
+                                </h2>
+                                <p className="mx-auto mt-6 max-w-xl text-lg leading-8 text-gray-300">
+                                    The AI-driven solution that enables you to
+                                    instantly get the right bash command. Start
+                                    now and be productive instead of wasting
+                                    time.
+                                </p>
+                                <div className="mt-10 flex items-center justify-center gap-x-6">
+                                    <a
+                                        href="#"
+                                        className="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+                                    >
+                                        Get started
+                                    </a>
+                                    <a
+                                        href="#"
+                                        className="text-sm font-semibold leading-6 text-white"
+                                    >
+                                        Documentation{" "}
+                                        <span aria-hidden="true">→</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </>
+
+                <div className={styles.center}>
+                    <div className="relative isolate overflow-hidden ">
+                        <div className="py-24 px-6 sm:px-6 sm:py-32 lg:px-8">
+                            Put the terminal here
+                        </div>
+                    </div>
+                </div>
+
+                <div className={styles.grid}>
                     <a
-                        href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
+                        href="/docs"
+                        className={styles.card}
                         target="_blank"
                         rel="noopener noreferrer"
                     >
-                        By{" "}
-                        <Image
-                            src="/vercel.svg"
-                            alt="Vercel Logo"
-                            className={styles.vercelLogo}
-                            width={100}
-                            height={24}
-                            priority
-                        />
+                        <h2 className={inter.className}>
+                            Documentation <span>-&gt;</span>
+                        </h2>
+                        <p className={inter.className}>
+                            Find in-depth information about bashgpt features and
+                            API.
+                        </p>
+                    </a>
+
+                    <a
+                        href="/examples"
+                        className={styles.card}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <h2 className={inter.className}>
+                            Examples <span>-&gt;</span>
+                        </h2>
+                        <p className={inter.className}>
+                            Explore the bashgpt examples.
+                        </p>
+                    </a>
+
+                    <a
+                        href="/contact"
+                        className={styles.card}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        <h2 className={inter.className}>
+                            Contact <span>-&gt;</span>
+                        </h2>
+                        <p className={inter.className}>
+                            Reach out for partnerships.
+                        </p>
                     </a>
                 </div>
-            </div>
-
-            <div className={styles.center}>
-                <Image
-                    className={styles.logo}
-                    src="/next.svg"
-                    alt="Next.js Logo"
-                    width={180}
-                    height={37}
-                    priority
-                />
-                <div className={styles.thirteen}>
-                    <Image
-                        src="/thirteen.svg"
-                        alt="13"
-                        width={40}
-                        height={31}
-                        priority
+                <svg
+                    viewBox="0 0 1024 1024"
+                    className="absolute top-1/2 left-1/2 -z-10 h-[64rem] w-[64rem] -translate-x-1/2 [mask-image:radial-gradient(closest-side,white,transparent)]"
+                    aria-hidden="true"
+                >
+                    <circle
+                        cx={512}
+                        cy={512}
+                        r={512}
+                        fill="url(#8d958450-c69f-4251-94bc-4e091a323369)"
+                        fillOpacity="0.7"
                     />
-                </div>
-            </div>
-
-            <div className={styles.grid}>
-                <a
-                    href="https://beta.nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-                    className={styles.card}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    <h2 className={inter.className}>
-                        Docs <span>-&gt;</span>
-                    </h2>
-                    <p className={inter.className}>
-                        Find in-depth information about Next.js features and
-                        API.
-                    </p>
-                </a>
-
-                <a
-                    href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-                    className={styles.card}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    <h2 className={inter.className}>
-                        Templates <span>-&gt;</span>
-                    </h2>
-                    <p className={inter.className}>
-                        Explore the Next.js 13 playground.
-                    </p>
-                </a>
-
-                <a
-                    href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-                    className={styles.card}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    <h2 className={inter.className}>
-                        Deploy <span>-&gt;</span>
-                    </h2>
-                    <p className={inter.className}>
-                        Instantly deploy your Next.js site to a shareable URL
-                        with Vercel.
-                    </p>
-                </a>
-            </div>
-        </main>
+                    <defs>
+                        <radialGradient id="8d958450-c69f-4251-94bc-4e091a323369">
+                            <stop stopColor="#7775D6" />
+                            <stop offset={1} stopColor="#E935C1" />
+                        </radialGradient>
+                    </defs>
+                </svg>
+            </main>
+        </>
     );
 }
