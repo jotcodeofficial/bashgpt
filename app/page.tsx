@@ -1,6 +1,9 @@
 import { Inter } from "next/font/google";
 import styles from "./page.module.css";
 import Header from "./components/header/page";
+import Console from "./components/terminal/page";
+import Terminal from "./components/terminal/page";
+import Footer from "./components/footer/page";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -44,57 +47,58 @@ export default function Home() {
                     </div>
                 </>
 
-                <div className={styles.center}>
-                    <div className="relative isolate overflow-hidden ">
-                        <div className="py-24 px-6 sm:px-6 sm:py-32 lg:px-8">
-                            Put the terminal here
-                        </div>
+                <div className="w-screen px-10 sm:px-20 md:px-40 xl:px-60 xxl:px-80 pt-10">
+                    <div className="relative isolate overflow-hidden bg-black ">
+                        <Terminal />
                     </div>
                 </div>
 
-                <div className={styles.grid}>
-                    <a
-                        href="/docs"
-                        className={styles.card}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        <h2 className={inter.className}>
-                            Documentation <span>-&gt;</span>
-                        </h2>
-                        <p className={inter.className}>
-                            Find in-depth information about bashgpt features and
-                            API.
-                        </p>
-                    </a>
+                <div className="pt-20 ">
+                    <div className={styles.grid}>
+                        <a
+                            href="/docs"
+                            className={styles.card}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <h2 className={inter.className}>
+                                Documentation <span>-&gt;</span>
+                            </h2>
+                            <p className={inter.className}>
+                                Find in-depth information about bashgpt features
+                                and API.
+                            </p>
+                        </a>
 
-                    <a
-                        href="/examples"
-                        className={styles.card}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        <h2 className={inter.className}>
-                            Examples <span>-&gt;</span>
-                        </h2>
-                        <p className={inter.className}>
-                            Explore the bashgpt examples.
-                        </p>
-                    </a>
+                        <a
+                            href="/examples"
+                            className={styles.card}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <h2 className={inter.className}>
+                                Examples <span>-&gt;</span>
+                            </h2>
+                            <p className={inter.className}>
+                                Explore bashgpt examples to help you get
+                                started.
+                            </p>
+                        </a>
 
-                    <a
-                        href="/contact"
-                        className={styles.card}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        <h2 className={inter.className}>
-                            Contact <span>-&gt;</span>
-                        </h2>
-                        <p className={inter.className}>
-                            Reach out for partnerships.
-                        </p>
-                    </a>
+                        <a
+                            href="/contact"
+                            className={styles.card}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                        >
+                            <h2 className={inter.className}>
+                                Contact <span>-&gt;</span>
+                            </h2>
+                            <p className={inter.className}>
+                                Reach out! We would love to hear from you.
+                            </p>
+                        </a>
+                    </div>
                 </div>
                 <svg
                     viewBox="0 0 1024 1024"
@@ -116,6 +120,7 @@ export default function Home() {
                     </defs>
                 </svg>
             </main>
+            <Footer />
         </>
     );
 }
