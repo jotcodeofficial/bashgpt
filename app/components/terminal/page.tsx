@@ -4,8 +4,22 @@ import { useState } from "react";
 export default function Terminal() {
     const [command, setCommandValue] = useState("");
 
-    const handleInputChange = (event: { target: { value: any } }) => {
-        setCommandValue(event.target.value);
+    const handleInputChange = (event: any) => {
+        event.preventDefault();
+        const { value, keyCode } = event.target;
+        if (keyCode === 13) {
+            // 13 is the keycode for the Enter key
+            console.log("Enter key pressed ✅");
+        }
+
+        setCommandValue(value);
+    };
+
+    const handleSubmit = async (event: any) => {
+        event.preventDefault();
+        const res = await fetch("/api/chatgpt/");
+        const result = await res.json();
+        console.log(result);
     };
 
     return (
@@ -21,7 +35,7 @@ export default function Terminal() {
                 <div className="flex h-96 flex-col space-y-2 overflow-y-auto bg-zinc p-3 pb-16 font-mono text-base text-light ">
                     <div className="flex flex-row items-center ">
                         <div className="text-gray">&gt;</div>
-                        <form action="submit" className="w-full">
+                        <form onSubmit={handleSubmit} className="w-full">
                             <input
                                 className="w-full bg-transparent pl-2.5 focus:outline-none focus:ring-0 focus:ring-offset-0"
                                 placeholder="Explain what the bash command should do..."
