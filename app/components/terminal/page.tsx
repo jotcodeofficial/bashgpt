@@ -1,10 +1,11 @@
 "use client";
-import React from "react";
+import React, { useRef } from "react";
 import { useState } from "react";
 
 export default function Terminal() {
     const [command, setCommandValue] = useState("");
     const [previousResults, setPreviousResults] = useState<string[]>([]);
+    const lastResultRef = useRef<HTMLInputElement>(null);
 
     const handleInputChange = (event: any) => {
         event.preventDefault();
@@ -27,6 +28,8 @@ export default function Terminal() {
             JSON.stringify(result),
         ]);
         setCommandValue("");
+
+        lastResultRef.current?.scrollIntoView({ behavior: "smooth" });
     };
 
     return (
@@ -41,7 +44,15 @@ export default function Terminal() {
                 </div>
                 <div className="flex h-96 flex-col space-y-2 overflow-y-auto bg-zinc p-3 pb-16 font-mono text-base text-light ">
                     {previousResults.map((text, index) => (
-                        <div className="flex flex-row items-center" key={index}>
+                        <div
+                            className="flex flex-row items-center"
+                            key={index}
+                            ref={
+                                index === previousResults.length - 1
+                                    ? lastResultRef
+                                    : null
+                            }
+                        >
                             <div className="text-gray">&gt;</div>
                             <p className="pl-2.5" style={{ display: "block" }}>
                                 {text}
