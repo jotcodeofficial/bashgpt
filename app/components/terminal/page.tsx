@@ -1,8 +1,10 @@
 "use client";
+import React from "react";
 import { useState } from "react";
 
 export default function Terminal() {
     const [command, setCommandValue] = useState("");
+    const [previousResults, setPreviousResults] = useState<string[]>([]);
 
     const handleInputChange = (event: any) => {
         event.preventDefault();
@@ -17,9 +19,14 @@ export default function Terminal() {
 
     const handleSubmit = async (event: any) => {
         event.preventDefault();
-        const res = await fetch("/api/chatgpt/");
+        const res = await fetch("/api/gpt?prompt=${command}`");
         const result = await res.json();
         console.log(result);
+        setPreviousResults((prevArray) => [
+            ...prevArray,
+            JSON.stringify(result),
+        ]);
+        setCommandValue("");
     };
 
     return (
@@ -33,6 +40,15 @@ export default function Terminal() {
                     </div>
                 </div>
                 <div className="flex h-96 flex-col space-y-2 overflow-y-auto bg-zinc p-3 pb-16 font-mono text-base text-light ">
+                    {previousResults.map((text, index) => (
+                        <div className="flex flex-row items-center" key={index}>
+                            <div className="text-gray">&gt;</div>
+                            <p className="pl-2.5" style={{ display: "block" }}>
+                                {text}
+                            </p>
+                        </div>
+                    ))}
+
                     <div className="flex flex-row items-center ">
                         <div className="text-gray">&gt;</div>
                         <form onSubmit={handleSubmit} className="w-full">
