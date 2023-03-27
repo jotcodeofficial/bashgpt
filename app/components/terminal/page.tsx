@@ -20,7 +20,7 @@ export default function Terminal() {
 
     const handleSubmit = async (event: any) => {
         event.preventDefault();
-        const res = await fetch("/api/gpt?prompt=${command}`");
+        const res = await fetch("/api/gpt?prompt=${command}");
         const result = await res.json();
         console.log(result);
         setPreviousResults((prevArray) => [
@@ -29,7 +29,10 @@ export default function Terminal() {
         ]);
         setCommandValue("");
 
-        lastResultRef.current?.scrollIntoView({ behavior: "smooth" });
+        lastResultRef.current?.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+        });
     };
 
     return (
@@ -42,7 +45,7 @@ export default function Terminal() {
                         <div className="ml-2 h-3 w-3 rounded-full bg-green-500"></div>
                     </div>
                 </div>
-                <div className="flex h-96 flex-col space-y-2 overflow-y-auto bg-zinc p-3 pb-16 font-mono text-base text-light ">
+                <div className="flex h-96 flex-col space-y-2 overflow-y-auto bg-zinc p-3 pb-16 font-mono text-base text-light">
                     {previousResults.map((text, index) => (
                         <div
                             className="flex flex-row items-center"
