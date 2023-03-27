@@ -25,6 +25,7 @@ export default function Terminal() {
         console.log(result);
         setPreviousResults((prevArray) => [
             ...prevArray,
+            command,
             JSON.stringify(result),
         ]);
         setCommandValue("");
