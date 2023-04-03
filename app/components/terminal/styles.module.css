@@ -1,0 +1,12 @@
+@keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  
+  .loading {
+    position: relative;
+  }
+  
+  .loading span {
+    position: absolute;
+    animation: spin 1s linear infinite;
+  }

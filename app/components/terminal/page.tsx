@@ -2,6 +2,7 @@
 import { URLSearchParams } from "next/dist/compiled/@edge-runtime/primitives/url";
 import React, { useEffect, useRef } from "react";
 import { useState } from "react";
+import styles from "./styles.module.css";
 
 export default function Terminal() {
     const [command, setCommandValue] = useState("");
@@ -9,6 +10,7 @@ export default function Terminal() {
     const [previousResults, setPreviousResults] = useState<string[]>([]);
     const [currentIndex, setCurrentIndex] = useState<number>(1);
     const lastResultRef = useRef<HTMLInputElement>(null);
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleInputChange = (event: any) => {
         event.preventDefault();
@@ -53,10 +55,12 @@ export default function Terminal() {
 
     const handleSubmit = async (event: any) => {
         event.preventDefault();
+        setIsLoading(true);
         const res = await fetch(
             "/api/gpt?" + new URLSearchParams({ prompt: command })
         );
         const result = await res.json();
+
         console.log(result);
         setPreviousResults((prevArray) => [
             ...prevArray,
@@ -66,6 +70,7 @@ export default function Terminal() {
         setPreviousCommands((prevArray) => [...prevArray, command]);
         setCurrentIndex(previousCommands.length);
         setCommandValue("");
+        setIsLoading(false);
 
         lastResultRef.current?.scrollIntoView({
             behavior: "smooth",
@@ -101,7 +106,7 @@ export default function Terminal() {
                         </div>
                     ))}
 
-                    <div className="flex flex-row items-center ">
+                    <div className="flex flex-row items-center">
                         <div className="text-gray">&gt;</div>
                         <form onSubmit={handleSubmit} className="w-full">
                             <input
@@ -113,6 +118,11 @@ export default function Terminal() {
                             />
                         </form>
                     </div>
+                    {isLoading && (
+                        <div className={styles.loading}>
+                            <span>/</span>
+                        </div>
+                    )}
                 </div>
             </div>
             <div className="absolute bottom-0 left-0 right-0 top-0 h-full w-full bg-terminal-pattern opacity-20 blur-3xl"></div>
