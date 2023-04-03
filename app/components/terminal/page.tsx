@@ -1,26 +1,61 @@
 "use client";
-import React, { useRef } from "react";
+import { URLSearchParams } from "next/dist/compiled/@edge-runtime/primitives/url";
+import React, { useEffect, useRef } from "react";
 import { useState } from "react";
 
 export default function Terminal() {
     const [command, setCommandValue] = useState("");
+    const [previousCommands, setPreviousCommands] = useState<string[]>([]);
     const [previousResults, setPreviousResults] = useState<string[]>([]);
+    const [currentIndex, setCurrentIndex] = useState<number>(1);
     const lastResultRef = useRef<HTMLInputElement>(null);
 
     const handleInputChange = (event: any) => {
         event.preventDefault();
-        const { value, keyCode } = event.target;
-        if (keyCode === 13) {
-            // 13 is the keycode for the Enter key
-            console.log("Enter key pressed ✅");
-        }
+        const { value } = event.target;
 
         setCommandValue(value);
     };
 
+    const handleArrowKeys = (event: any) => {
+        const { keyCode } = event;
+
+        if (keyCode === 38) {
+            // Up arrow key
+            if (currentIndex > 0) {
+                setCurrentIndex(currentIndex - 1);
+                const updateCommand = previousCommands[currentIndex - 1];
+                setCommandValue(updateCommand);
+                console.log(updateCommand);
+            }
+            event.preventDefault();
+        } else if (keyCode === 40) {
+            // Down arrow key
+            if (currentIndex < previousCommands.length - 1) {
+                setCurrentIndex(currentIndex + 1);
+                const updateCommand = previousCommands[currentIndex + 1];
+                setCommandValue(updateCommand);
+                console.log(updateCommand);
+            } else {
+                setCurrentIndex(previousCommands.length);
+                setCommandValue("");
+            }
+            event.preventDefault();
+        }
+
+        console.log(
+            "previousCommands[currentIndex]",
+            previousCommands[currentIndex]
+        );
+        console.log("previousCommands.length", previousCommands.length);
+        console.log("currentIndex:", currentIndex);
+    };
+
     const handleSubmit = async (event: any) => {
         event.preventDefault();
-        const res = await fetch("/api/gpt?prompt=${command}");
+        const res = await fetch(
+            "/api/gpt?" + new URLSearchParams({ prompt: command })
+        );
         const result = await res.json();
         console.log(result);
         setPreviousResults((prevArray) => [
@@ -28,6 +63,8 @@ export default function Terminal() {
             command,
             JSON.stringify(result),
         ]);
+        setPreviousCommands((prevArray) => [...prevArray, command]);
+        setCurrentIndex(previousCommands.length);
         setCommandValue("");
 
         lastResultRef.current?.scrollIntoView({
@@ -72,6 +109,7 @@ export default function Terminal() {
                                 placeholder="Explain what the bash command should do..."
                                 value={command}
                                 onChange={handleInputChange}
+                                onKeyDown={handleArrowKeys}
                             />
                         </form>
                     </div>

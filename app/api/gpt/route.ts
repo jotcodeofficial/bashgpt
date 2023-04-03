@@ -10,7 +10,7 @@ const configuration = new Configuration({
 
 const openai = new OpenAIApi(configuration);
 
-const prompt_template = 'Here is the shell or linux command: ';
+const prompt_template = 'Here is the shell or linux command in a code block:';
 
 export async function GET(request: Request) {
 
