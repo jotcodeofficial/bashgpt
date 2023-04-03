@@ -55,7 +55,7 @@ export default function Terminal() {
         setPreviousResults((prevArray) => [
             ...prevArray,
             command,
-            JSON.stringify(result),
+            result.response,
         ]);
         setPreviousCommands((prevArray) => [...prevArray, command]);
         setCurrentIndex(previousCommands.length);
