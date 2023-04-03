@@ -32,7 +32,7 @@ export async function GET(request: Request) {
 
   // check if completion.data.choices[0].text contains triple backticks
   if(completion.data.choices[0].text.indexOf('```') === -1)
-    return NextResponse.json({"error": "completion failed"});
+    return NextResponse.json({"response": "This is not a valid bash question, try again", "error": "completion failed"});
 
   let output = completion.data.choices[0].text.split('```')[1]
     .replace(/^bash\n/, '')
