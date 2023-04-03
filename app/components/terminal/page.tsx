@@ -28,7 +28,6 @@ export default function Terminal() {
                 setCurrentIndex(currentIndex - 1);
                 const updateCommand = previousCommands[currentIndex - 1];
                 setCommandValue(updateCommand);
-                console.log(updateCommand);
             }
             event.preventDefault();
         } else if (keyCode === 40) {
@@ -37,20 +36,12 @@ export default function Terminal() {
                 setCurrentIndex(currentIndex + 1);
                 const updateCommand = previousCommands[currentIndex + 1];
                 setCommandValue(updateCommand);
-                console.log(updateCommand);
             } else {
                 setCurrentIndex(previousCommands.length);
                 setCommandValue("");
             }
             event.preventDefault();
         }
-
-        console.log(
-            "previousCommands[currentIndex]",
-            previousCommands[currentIndex]
-        );
-        console.log("previousCommands.length", previousCommands.length);
-        console.log("currentIndex:", currentIndex);
     };
 
     const handleSubmit = async (event: any) => {
@@ -61,7 +52,6 @@ export default function Terminal() {
         );
         const result = await res.json();
 
-        console.log(result);
         setPreviousResults((prevArray) => [
             ...prevArray,
             command,
