@@ -10,7 +10,11 @@ https://bashgpt.com
 
 ## Getting Started
 
-First, run the development server:
+Ensure you have a env.local file in your root directory with your gpt api key:
+
+```BASHGPT_OPENAI_KEY=your-key```
+
+Then, run the development server:
 
 ```bash
 npm run dev
