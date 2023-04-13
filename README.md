@@ -6,6 +6,8 @@
 BashGPT is an AI-driven solution that enables you to instantly get the right bash command.
 Start now and be productive instead of wasting time. 
 
+https://bashgpt.com
+
 ## Getting Started
 
 First, run the development server:
